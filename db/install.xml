@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<XMLDB PATH="blocks/sharedropbox/db" VERSION="20090528" COMMENT="XMLDB file for Moodle blocks/sharedropbox"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:noNamespaceSchemaLocation="../../../lib/xmldb/xmldb.xsd"
+>
+  <TABLES>
+    <TABLE NAME="block_sharedropbox_comments" COMMENT="share drop box comments" 
+            NEXT="block_sharedropbox_likes">
+      <FIELDS>
+        <FIELD NAME="id" TYPE="int" LENGTH="11" NOTNULL="true" UNSIGNED="true" SEQUENCE="true" ENUM="false" 
+                    NEXT="datetimeno"/>
+        <FIELD NAME="datetimeno" TYPE="int" LENGTH="14" NOTNULL="true" UNSIGNED="true"  ENUM="false" 
+                    PREVIOUS="id" NEXT="submission" />
+        <FIELD NAME="submission" TYPE="int" LENGTH="11" NOTNULL="true" UNSIGNED="true"  ENUM="false" 
+                    PREVIOUS="datetimeno" NEXT="sid" />
+        <FIELD NAME="sid" TYPE="int" LENGTH="11" NOTNULL="true" UNSIGNED="true" ENUM="false" 
+                    PREVIOUS="submission" NEXT="comment" />
+        <FIELD NAME="comment" TYPE="text" NOTNULL="false" ENUM="false" 
+                    PREVIOUS="sid" />
+      </FIELDS>
+      <KEYS>
+        <KEY NAME="primary" TYPE="primary" FIELDS="id" NEXT="submission" />
+        <KEY NAME="submission" TYPE="unique" FIELDS="submission,sid,datetimeno" PREVIOUS="primary" />
+      </KEYS>
+    </TABLE>
+    
+    <TABLE NAME="block_sharedropbox_likes" COMMENT="share drop box likes" 
+            PREVIOUS="block_sharedropbox_comments">
+      <FIELDS>
+        <FIELD NAME="id" TYPE="int" LENGTH="11" NOTNULL="true" UNSIGNED="true" SEQUENCE="true" ENUM="false" 
+                    NEXT="submission"/>
+        <FIELD NAME="submission" TYPE="int" LENGTH="11" NOTNULL="true" UNSIGNED="true" ENUM="false" 
+                    PREVIOUS="id" NEXT="sid"/>
+        <FIELD NAME="sid" TYPE="int" LENGTH="11" NOTNULL="true" UNSIGNED="true"  ENUM="false" 
+                    PREVIOUS="submission"/>
+      </FIELDS>
+      <KEYS>
+        <KEY NAME="primary" TYPE="primary" FIELDS="id" NEXT="submission" />
+        <KEY NAME="submission" TYPE="unique" FIELDS="submission,sid"  PREVIOUS="primary" />
+      </KEYS>  
+    </TABLE>
+  </TABLES>
+</XMLDB>
